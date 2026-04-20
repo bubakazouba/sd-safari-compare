@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SD Zoo Safari Park — Safari Comparison</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a2332;
+    --text: #e8eef4;
+    --muted: #8a9ba8;
+    --accent: #f4a261;
+    --good: #2a9d8f;
+    --warn: #e9c46a;
+    --bad:  #e76f51;
+    --line: #2a3849;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+  }
+  h1 { margin: 0 0 4px; font-size: 28px; color: var(--accent); }
+  .sub { color: var(--muted); margin-bottom: 24px; font-size: 14px; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 16px; font-size: 13px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .dot.good { background: var(--good); }
+  .dot.warn { background: var(--warn); }
+  .dot.bad  { background: var(--bad); }
+  .controls { margin-bottom: 12px; }
+  .controls button {
+    background: var(--panel); color: var(--text); border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 6px; cursor: pointer; margin-right: 6px; font-size: 13px;
+  }
+  .controls button:hover { border-color: var(--accent); }
+  .controls button.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+  table { width: 100%; border-collapse: collapse; background: var(--panel); border-radius: 8px; overflow: hidden; }
+  th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--line); font-size: 14px; vertical-align: top; }
+  th { background: #122031; color: var(--accent); font-weight: 600; cursor: pointer; user-select: none; position: sticky; top: 0; }
+  th:hover { color: #fff; }
+  tr.hidden { display: none; }
+  td.mob-good { color: var(--good); font-weight: 600; }
+  td.mob-warn { color: var(--warn); font-weight: 600; }
+  td.mob-bad  { color: var(--bad);  font-weight: 600; }
+  td a { color: var(--accent); text-decoration: none; }
+  td a:hover { text-decoration: underline; }
+  .price { font-variant-numeric: tabular-nums; }
+  footer { margin-top: 24px; color: var(--muted); font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>San Diego Zoo Safari Park — Safari Comparison</h1>
+  <div class="sub">All bookable safaris in one place. Source: <a href="https://sdzsafaripark.org/safaris" style="color:var(--accent)">sdzsafaripark.org/safaris</a> · admission ($72 adult) is separate for all options.</div>
+
+  <div class="legend">
+    <span><span class="dot good"></span> Mobility-friendly (vehicle-based, minimal walking)</span>
+    <span><span class="dot warn"></span> Some walking on uneven terrain</span>
+    <span><span class="dot bad"></span> Significant walking or stairs required</span>
+  </div>
+
+  <div class="controls">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="good">Mobility-friendly only</button>
+    <button data-filter="day">Day-trip only (no overnight)</button>
+  </div>
+
+  <table id="t">
+    <thead>
+      <tr>
+        <th data-sort="name">Safari</th>
+        <th data-sort="dur">Duration</th>
+        <th data-sort="price">Price (from)</th>
+        <th>Vehicle / Walking</th>
+        <th>Age</th>
+        <th>Mobility</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-good="1" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/wildlife-safari" target="_blank">Wildlife Safari</a></td>
+        <td data-v="60">1 hr</td>
+        <td class="price" data-v="98">$98+</td>
+        <td>Open-air covered safari truck</td>
+        <td>3+</td>
+        <td class="mob-good">Vehicle</td>
+        <td>Through African + Asian savanna habitats. Wheelchair-accessible carts on request.</td>
+      </tr>
+      <tr data-good="1" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/wildlife-safari" target="_blank">Deluxe Wildlife Safari</a></td>
+        <td data-v="90">1.5 hr</td>
+        <td class="price" data-v="124">$124+</td>
+        <td>Open-air safari truck</td>
+        <td>6+</td>
+        <td class="mob-good">Vehicle</td>
+        <td>Same route, longer + more time at habitats. Best return-on-time of the truck options.</td>
+      </tr>
+      <tr data-good="1" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/wildlife-safari" target="_blank">Sips on Savanna</a></td>
+        <td data-v="120">2 hr</td>
+        <td class="price" data-v="155">$155+</td>
+        <td>Truck + viewpoint stop</td>
+        <td>21+</td>
+        <td class="mob-good">Vehicle</td>
+        <td>Includes seasonal beverage, snacks, souvenir glass. Select dates only.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/cart-safaris" target="_blank">Cart Safari</a></td>
+        <td data-v="60">1 hr</td>
+        <td class="price" data-v="64">$64+</td>
+        <td>Cart + walking on uneven terrain</td>
+        <td>All</td>
+        <td class="mob-warn">Cart + walk</td>
+        <td>Cheapest guided option. Wheelchair-accessible cart available — call 619-718-3000.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/cart-safaris" target="_blank">Deluxe Cart Safari</a></td>
+        <td data-v="90">1.5 hr</td>
+        <td class="price" data-v="94">$94+</td>
+        <td>Cart with disembark stops</td>
+        <td>All</td>
+        <td class="mob-warn">Cart + walk</td>
+        <td>Stops to get out at habitats. Accessible cart on request.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/behind-scenes-safari" target="_blank">Behind-the-Scenes (Standard)</a></td>
+        <td data-v="90">1.5 hr</td>
+        <td class="price" data-v="98">$98+</td>
+        <td>Cart + uneven walkways</td>
+        <td>All</td>
+        <td class="mob-warn">Cart + walk</td>
+        <td>Access to wildlife care areas. No strollers/service animals.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/behind-scenes-safari" target="_blank">Behind-the-Scenes (Deluxe)</a></td>
+        <td data-v="120">2 hr</td>
+        <td class="price" data-v="124">$124+</td>
+        <td>Cart + uneven walkways</td>
+        <td>All</td>
+        <td class="mob-warn">Cart + walk</td>
+        <td>Longer behind-the-scenes access.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/behind-scenes-safari" target="_blank">Elite Adventure</a></td>
+        <td data-v="210">3.5 hr</td>
+        <td class="price" data-v="449">$449+</td>
+        <td>Cart + uneven walkways</td>
+        <td>All</td>
+        <td class="mob-warn">Cart + walk</td>
+        <td>Snack service + extended staff-only zone access.</td>
+      </tr>
+      <tr data-good="1" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/ultimate-safari" target="_blank">Ultimate Safari</a></td>
+        <td data-v="300">5 or 7 hr</td>
+        <td class="price" data-v="760">$760+</td>
+        <td>Customized — can be all-cart</td>
+        <td>All</td>
+        <td class="mob-good">Customizable</td>
+        <td>Private guide + sit-down lunch. Can be tailored around mobility limits. 72hr advance.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/flightline-safari" target="_blank">Flightline Safari</a></td>
+        <td data-v="90">1.5 hr</td>
+        <td class="price" data-v="120">$120+</td>
+        <td>Zipline + stairs</td>
+        <td>8+</td>
+        <td class="mob-bad">Stairs req</td>
+        <td>Weight 60–275 lb. Must climb stairs. Closed-toed shoes.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/wildlife-trek" target="_blank">Walking with Elephants</a></td>
+        <td data-v="60">1 hr</td>
+        <td class="price" data-v="32">$32+</td>
+        <td>Walking on moderate slopes</td>
+        <td>All</td>
+        <td class="mob-bad">60-min walk</td>
+        <td>Mobility devices permitted on paths. Cheapest option overall.</td>
+      </tr>
+      <tr data-good="0" data-day="1">
+        <td><a href="https://sdzsafaripark.org/safaris/wildlife-trek" target="_blank">Sip &amp; Stroll: Elephant Valley</a></td>
+        <td data-v="90">1.5 hr</td>
+        <td class="price" data-v="96">$96+</td>
+        <td>Walking on moderate slopes</td>
+        <td>21+</td>
+        <td class="mob-bad">90-min walk</td>
+        <td>Includes drinks. Mobility devices ok but it IS a stroll.</td>
+      </tr>
+      <tr data-good="0" data-day="0">
+        <td><a href="https://sdzsafaripark.org/safaris/roar-snore-safaris" target="_blank">Roar &amp; Snore (Classic)</a></td>
+        <td data-v="999">Overnight</td>
+        <td class="price" data-v="205">$205+</td>
+        <td>Mixed — sleepover</td>
+        <td>All / 21+ / 5+ / Grades 3-12</td>
+        <td class="mob-warn">Mixed</td>
+        <td>Tent sleepover. Vista $230, Premium $255 tiers.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <footer>
+    Built 2026-04-19. Pricing snapshot — verify on the official site before booking. All prices are <em>per person, plus admission</em>.
+  </footer>
+
+<script>
+  document.querySelectorAll('th[data-sort]').forEach(th => {
+    th.addEventListener('click', () => {
+      const tbody = document.querySelector('#t tbody');
+      const idx = [...th.parentNode.children].indexOf(th);
+      const rows = [...tbody.querySelectorAll('tr')];
+      const dir = th.dataset.dir === 'asc' ? 'desc' : 'asc';
+      th.dataset.dir = dir;
+      rows.sort((a, b) => {
+        const av = a.children[idx].dataset.v ?? a.children[idx].innerText;
+        const bv = b.children[idx].dataset.v ?? b.children[idx].innerText;
+        const an = parseFloat(av), bn = parseFloat(bv);
+        if (!isNaN(an) && !isNaN(bn)) return dir === 'asc' ? an - bn : bn - an;
+        return dir === 'asc' ? String(av).localeCompare(String(bv)) : String(bv).localeCompare(String(av));
+      });
+      rows.forEach(r => tbody.appendChild(r));
+    });
+  });
+
+  document.querySelectorAll('.controls button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      document.querySelectorAll('#t tbody tr').forEach(tr => {
+        let show = true;
+        if (f === 'good') show = tr.dataset.good === '1';
+        if (f === 'day')  show = tr.dataset.day === '1';
+        tr.classList.toggle('hidden', !show);
+      });
+    });
+  });
+</script>
+</body>
+</html>
