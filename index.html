@@ -286,9 +286,9 @@
     // free experiences (same both days)
     { id: 'tram', name: 'Africa Tram', free: true, badges: '<span class="badge free">FREE</span>',
       mob: 'good', mobLabel: 'Vehicle (Easy Access Pass)',
-      desc: 'Open-air tram around the African plains — giraffes, rhinos, antelope. Sit LEFT side for giraffes.',
+      desc: 'Open-air narrated tram around the African plains — giraffes, rhinos, antelope. 25-min ride. Sit LEFT side for giraffes. <b>Starts 9:30am (30 min after park opens), busiest 11am–3pm.</b>',
       durMin: 25, route: 'free-tram',
-      url: null, both: { price: 0, slots: ['11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:15'], slotsLabel: 'runs every ~15min, last ~4:15pm' }
+      url: null, both: { price: 0, slots: ['9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:15'], slotsLabel: 'starts 9:30am, runs continuously, last ~4:15pm. Sat/Sun noon = special "Botanical Tram" plant-focus version.' }
     },
     { id: 'eleph_valley', name: 'Elephant Valley walk', free: true, badges: '<span class="badge free">FREE · NEW</span>',
       mob: 'warn', mobLabel: 'Walkable bridge',
@@ -380,6 +380,14 @@
       url: 'https://tickets.sandiegozoo.org/webstore/shop/viewItems.aspx?cg=webstoresdp&c=6180836',
       sat: { price: 499, slots: ['11:15'] },
       sun: { price: 474, slots: ['11:15'] }
+    },
+    { id: 'ultimate', name: 'Ultimate Safari (custom)', mob: 'good', mobLabel: 'Custom — wheelchair-friendly cart available',
+      phoneOnly: true,
+      desc: '<span class="badge warn">PHONE-ONLY · 72hr ahead</span>5hr or 7hr fully customized — your own personal guide, sit-down lunch, exclusive habitat areas, animal interactions. Built around your interests. <b>Call 619-718-3000 to book (not online).</b> Often the answer for mobility-restricted guests who want everything tailored.',
+      durMin: 300, route: 'ultimate',
+      url: 'https://sdzsafaripark.org/safaris/ultimate-safari',
+      sat: { price: 760, slots: ['10:00'], slotsLabel: '<span class="badge warn">CALL 619-718-3000</span> 72hr advance booking. Pick your own start time.' },
+      sun: { price: 760, slots: ['10:00'], slotsLabel: '<span class="badge warn">CALL 619-718-3000</span> 72hr advance booking. Pick your own start time.' }
     },
     { id: 'flightline', name: 'Flightline Safari', mob: 'bad', mobLabel: 'Stairs req · 60–275 lb',
       desc: '<span class="badge">PRP RISK</span>2/3-mile dual zipline OVER the African Plains. Stairs to climb. Bad in rain. Ages 8+.',
