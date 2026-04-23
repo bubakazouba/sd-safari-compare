@@ -290,17 +290,17 @@
       durMin: 25, route: 'free-tram',
       url: null, both: { price: 0, slots: ['9:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:15'], slotsLabel: 'starts 9:30am, runs continuously, last ~4:15pm. Sat/Sun noon = special "Botanical Tram" plant-focus version.' }
     },
-    { id: 'eleph_valley', name: 'Elephant Valley walk', free: true, badges: '<span class="badge free">FREE · NEW</span>',
+    { id: 'eleph_valley', name: 'Elephant Valley walk', free: true, anytime: true, badges: '<span class="badge free">FREE · NEW</span>',
       mob: 'warn', mobLabel: 'Walkable bridge',
       desc: 'NEW Mar 2026 — guided bridge through elephant habitat. "Surrounded on both sides." Free with admission.',
       durMin: 40, route: 'free-elephant',
-      url: null, both: { price: 0, slots: ['11:00','12:00','13:00','14:00','15:00','16:00'], slotsLabel: 'walk-up, anytime park is open' }
+      url: null, both: { price: 0, slots: ['11:00'], slotsLabel: 'walk-up, anytime park is open' }
     },
-    { id: 'hidden_jungle', name: 'Hidden Jungle aviary', free: true, badges: '<span class="badge free">FREE</span>',
+    { id: 'hidden_jungle', name: 'Hidden Jungle aviary', free: true, anytime: true, badges: '<span class="badge free">FREE</span>',
       mob: 'good', mobLabel: 'Climate-controlled, paved',
       desc: 'Indoor aviary — close bird encounters. Best midday heat refuge.',
       durMin: 20, route: 'free-aviary',
-      url: null, both: { price: 0, slots: ['11:00','12:00','13:00','14:00','15:00','16:00'], slotsLabel: 'walk-up, anytime' }
+      url: null, both: { price: 0, slots: ['11:00'], slotsLabel: 'walk-up, anytime' }
     },
     // paid tours
     { id: 'wildlife', name: 'Wildlife Safari', mob: 'good', mobLabel: 'Truck',
@@ -531,13 +531,21 @@
         cell.innerHTML = '<span style="color:var(--muted);font-size:11px">—</span>';
         return;
       }
-      const sel = document.createElement('select');
-      slots.forEach(s => {
-        const o = document.createElement('option');
-        o.value = s;
-        o.textContent = fmtSlot(s);
-        sel.appendChild(o);
-      });
+      let picker;
+      if (tour.anytime) {
+        picker = document.createElement('input');
+        picker.type = 'time';
+        picker.value = slots[0] || '11:00';
+        picker.style.fontSize = '11px';
+      } else {
+        picker = document.createElement('select');
+        slots.forEach(s => {
+          const o = document.createElement('option');
+          o.value = s;
+          o.textContent = fmtSlot(s);
+          picker.appendChild(o);
+        });
+      }
       const btn = document.createElement('button');
       btn.textContent = '+ Add';
       btn.addEventListener('click', () => {
@@ -545,14 +553,14 @@
           id: nextId++,
           name: tour.name,
           route: tour.route,
-          startMin: timeToMin(sel.value),
+          startMin: timeToMin(picker.value),
           durMin: tour.durMin,
           cost: d.price || 0,
           free: tour.free,
         });
         renderPlanner();
       });
-      cell.appendChild(sel);
+      cell.appendChild(picker);
       cell.appendChild(btn);
     });
     applyFilter();
